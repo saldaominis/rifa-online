@@ -35,6 +35,80 @@ body:before{background-image:linear-gradient(120deg,transparent 0 47%,#d5ad52 47
 /* Logomarca com tamanho reduzido */
 .topbar .logo{width:96px;height:96px}
 @media(max-width:540px){.topbar .logo{width:68px;height:68px}}
+/* Fotos dos prêmios e contador da edição ativa */
+.prize-panel{grid-column:1/-1}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.gallery-tile{display:block;min-width:0;overflow:hidden;border:1px solid #507d61;border-radius:14px;background:#08251b;text-decoration:none;color:#eaf6ed}
+.gallery-tile img{display:block;width:100%;height:210px;object-fit:contain;padding:8px}
+.gallery-tile span{display:block;padding:8px 12px;font-size:.75rem;color:#c6dfcc;text-align:center;border-top:1px solid #32624c}
+.gallery-tile:focus-visible{outline:3px solid #f2d17b;outline-offset:3px}
+.availability{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 15px;border:1px solid #456b52;border-radius:14px;padding:13px 15px;background:#09291e}
+.availability strong{color:#f2d17b;font-size:1.5rem;font-variant-numeric:tabular-nums}
+.availability .small{color:#c6dfcc;font-size:.8rem}
+.availability-progress{height:8px;background:#204735;border-radius:100px;overflow:hidden;margin:8px 0 0}
+.availability-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#88e7ab,#f2d17b);transition:width .3s}
+.admin-photo-controls{padding:12px;margin:15px 0;border:1px solid #3d7757;border-radius:13px;background:#0b3022}
+.admin-photo-controls input[type=file]{max-width:100%;color:#e7f2ea;padding:9px;background:#0a2a1e;border:1px solid #46745b;border-radius:8px}
+.admin-photo-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:10px;margin-top:12px}
+.admin-photo-card{border:1px solid #46745b;border-radius:10px;overflow:hidden;background:#08251b}
+.admin-photo-card img{width:100%;height:105px;object-fit:contain;display:block}
+.admin-photo-card button{width:100%;padding:8px 4px;background:#723239;color:#fff;border:0;font-weight:700;font-size:.73rem}
+.admin-photo-card button:disabled{opacity:.5}
+@media(max-width:540px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery-tile img{height:145px}.availability strong{font-size:1.25rem}}
+/* Prêmio em marca d'água, antes do título */
+.hero-panel{min-height:285px;isolation:isolate}
+.hero-prize-watermark{position:absolute;inset:0;z-index:0;display:none;align-items:center;justify-content:flex-end;pointer-events:none;overflow:hidden}
+.hero-prize-watermark img{width:min(58%,490px);height:100%;object-fit:contain;opacity:.22;filter:saturate(.9);mask-image:linear-gradient(to right,transparent,#000 35%)}
+.hero-panel:has(.hero-prize-watermark img):before{opacity:.3}
+.hero-content{z-index:2}
+.top3-panel{margin:0 auto 24px;padding:20px 24px;background:linear-gradient(130deg,#16432f,#0b2c21);border:1px solid #527c60;border-radius:20px}
+.top3-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:13px}
+.top3-card{background:#09271d;border:1px solid #426c51;border-radius:13px;padding:15px;min-width:0}
+.top3-card .place{color:#f2d17b;font-size:.8rem;font-weight:900}
+.top3-card .buyer{display:block;color:white;font-weight:850;margin:7px 0;overflow-wrap:anywhere}
+.top3-card .quantity{color:#bfe4ca;font-size:.83rem}
+.top3-note{font-size:.78rem;color:#bcd7c5;margin:10px 0 0}
+@media(max-width:540px){.hero-prize-watermark img{width:80%;opacity:.15}.top3-grid{grid-template-columns:1fr}.top3-panel{padding:15px}}
+
+/* Layout definitivo: foto em primeiro lugar, título ao lado; sem galeria duplicada inferior. */
+.hero-panel{display:flex;align-items:center;gap:clamp(20px,4vw,52px);min-height:330px;padding:clamp(22px,4vw,42px)}
+.hero-panel .hero-prize-watermark{position:relative;inset:auto;z-index:2;flex:0 0 min(38%,355px);width:min(38%,355px);min-width:0;display:none;flex-direction:column;gap:8px;align-items:stretch;justify-content:center;overflow:visible;pointer-events:auto}
+.hero-panel .hero-prize-main{display:flex;align-items:center;justify-content:center;overflow:hidden;background:#08271edb;border:2px solid #f2d17b70;border-radius:18px;box-shadow:0 14px 35px #0006;min-height:220px;height:300px}
+.hero-panel .hero-prize-main img{display:block;width:100%;height:100%;object-fit:contain;opacity:1;filter:none;mask-image:none;padding:8px}
+.hero-panel .hero-prize-thumbnails{display:flex;gap:7px;max-width:100%;overflow-x:auto;justify-content:center}
+.hero-panel .hero-prize-thumbnails a{display:block;flex:0 0 56px;height:50px;background:#092b20;border:1px solid #c9aa61;border-radius:7px;overflow:hidden}
+.hero-panel .hero-prize-thumbnails img{width:100%;height:100%;object-fit:contain}
+.hero-panel .hero-content{flex:1;min-width:0;max-width:none;z-index:2}
+.hero-panel:after{opacity:.12;pointer-events:none}
+.hero-panel:has(.hero-prize-watermark img):before{opacity:.15}
+#public-prize-panel{display:none!important}
+@media(max-width:700px){
+ .hero-panel{flex-direction:column;align-items:stretch;gap:18px;min-height:0;padding:22px 18px}
+ .hero-panel .hero-prize-watermark{width:100%;flex:0 0 auto;max-width:none}
+ .hero-panel .hero-prize-main{height:265px;min-height:0}
+ .hero-panel .hero-content{width:100%}
+ .hero h2{font-size:clamp(1.85rem,8vw,2.7rem);margin:12px 0}
+}
+
+/* Vitrine pública — várias rifas independentes */
+.vitrine{padding:22px 0 12px}.vitrine h2{margin:0 0 7px;font-size:1.35rem;color:#f2d17b}.vitrine p{margin:0 0 15px;color:#c4d8c9}.vitrine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px}.vitrine-card{background:#103c2b;border:1px solid #577d5f;border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:10px}.vitrine-card.current{border:2px solid #f2d17b}.vitrine-photo{width:100%;height:175px;object-fit:contain;background:#09271d;border-radius:12px}.vitrine-title{font-weight:900;overflow-wrap:anywhere}.vitrine-meta{color:#c6ddca;font-size:.82rem}.vitrine-choose{border:0;background:#e6c773;color:#163625;border-radius:10px;padding:11px;font-weight:900}.vitrine-choose:disabled{opacity:.6;cursor:default}.vitrine-feedback{padding:9px 0;color:#e6c773;font-size:.85rem}
+
+/* Painel administrativo simplificado */
+.admin-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:2px 0 18px;padding-bottom:14px}
+.admin-nav .tab{min-width:0;white-space:normal;line-height:1.25;padding:11px 7px;font-size:.84rem;border:1px solid #47765b;background:#123e2d;color:#deeee1}
+.admin-nav .tab.active{background:#e6c773;color:#173525;border-color:#f2d17b}
+.admin-heading{font-size:1.08rem;margin:4px 0 8px;color:#f2d17b}
+.admin-action-box{padding:14px;border-radius:13px;border:1px solid #44735a;background:#0a2c21;margin:14px 0}
+.admin-action-box .formrow{margin:12px 0 0}
+.admin-action-box .secondary{font-size:.85rem;padding:11px 8px}
+.admin-section{border:1px solid #4b7a5f;border-radius:14px;background:#0b3023;margin:12px 0;overflow:hidden}
+.admin-section>summary{cursor:pointer;font-weight:850;padding:16px;color:#f1dfa8;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.admin-section>summary:after{content:'⌄';font-size:1.25rem}
+.admin-section[open]>summary:after{content:'⌃'}
+.admin-section>summary::-webkit-details-marker{display:none}
+.admin-section>.admin-photo-controls{margin:0 12px 14px;padding:12px}
+.admin-section>#draw-test-panel{margin:0 12px 14px!important;padding:12px}
+@media(max-width:540px){.admin-nav .tab{font-size:.78rem}.admin-action-box .formrow{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -45,13 +119,21 @@ body:before{background-image:linear-gradient(120deg,transparent 0 47%,#d5ad52 47
   </div>
   <button class="admin-btn" id="open-admin">⚙ Painel Admin</button>
 </div></header>
-<section class="hero"><div class="wrap"><div class="hero-panel"><div class="hero-content">
+<section class="wrap vitrine" id="vitrine" aria-label="Rifas disponíveis"><h2>🏁 Vitrine de rifas</h2><p>Escolha a rifa que deseja participar. Números, preços e participantes são separados por edição.</p><div class="vitrine-grid" id="vitrine-grid"></div><div class="vitrine-feedback" id="vitrine-feedback" aria-live="polite"></div></section>
+<section class="hero"><div class="wrap"><div class="hero-panel"><div class="hero-prize-watermark" id="hero-prize-watermark" aria-label="Fotos dos prêmios da rifa"></div><div class="hero-content">
   <span class="pill">🏁 Rifa • Edição especial</span>
   <h2 id="hero-title">Sua próxima miniatura <em>pode ser sua!</em></h2>
   <p>Escolha seus números, aproveite o combo promocional e venha acelerar com o Saldão Minis. Sua coleção merece essa emoção!</p>
-  <div class="hero-stats"><div class="stat">🎟️ <strong id="stat-total">100</strong> números</div><div class="stat">🔥 Combo <strong>10 por R$ 10,00</strong></div><div class="stat">🏎️ Escolha seus números</div></div>
+  <div class="hero-stats"><div class="stat">🏎️ Escolha seus números</div></div>
 </div></div></div></section>
+<section class="wrap top3-panel" id="public-top3-panel" style="display:none" aria-label="Ranking dos maiores compradores">
+  <h2 class="section-title" style="margin-bottom:4px"><span class="icon">🏆</span> TOP 3 — Maiores compradores</h2>
+  <p class="top3-note">Classificação por quantidade de números pagos nesta edição. Bilhetes bônus não entram no ranking.</p>
+  <div class="top3-grid" id="public-top3-grid"></div>
+  <p class="top3-note" id="public-top3-feedback" aria-live="polite"></p>
+</section>
 <main class="wrap layout">
+  <section id="public-prize-panel" style="display:none"><div id="public-prize-gallery"></div></section>
   <section class="panel">
     <h2 class="section-title"><span class="icon">✦</span> Preços & participação</h2>
     <div class="pricebox">
@@ -73,6 +155,10 @@ body:before{background-image:linear-gradient(120deg,transparent 0 47%,#d5ad52 47
     <div class="gridhead"><h2 class="section-title"><span class="icon">▦</span> Escolha sua sorte</h2>
       <div class="legend"><span><i class="dot available"></i> Disponível</span><span><i class="dot selected"></i> Selecionado</span><span><i class="dot taken"></i> Ocupado</span></div>
     </div>
+    <div class="availability" aria-live="polite">
+      <div><div class="small">Números disponíveis agora</div><strong id="available-count">—</strong><span class="small" id="occupied-count"> / 100 no total</span></div>
+      <div style="min-width:140px;flex:1;max-width:280px"><div class="small" id="availability-caption">Atualizando...</div><div class="availability-progress" aria-hidden="true"><i id="availability-bar"></i></div></div>
+    </div>
     <div class="grid" id="number-grid" aria-label="Grade de números da rifa"></div>
     <p class="gridnote">Números ocupados aparecem em vermelho escuro e não podem ser selecionados. Os números são atualizados pelo banco de dados.</p>
   </section>
@@ -83,19 +169,83 @@ body:before{background-image:linear-gradient(120deg,transparent 0 47%,#d5ad52 47
   <div class="modal"><div class="modalhead"><h2 id="admin-heading">🔐 Painel administrativo</h2><button class="close" id="close-admin" aria-label="Fechar">×</button></div>
     <div id="login-view"><p class="hint">Entre com seu usuário cadastrado no Supabase.</p><div class="field"><label for="admin-email">E-mail</label><input type="email" id="admin-email" autocomplete="username"></div><div class="field"><label for="admin-password">Senha</label><input type="password" id="admin-password" autocomplete="current-password" placeholder="Sua senha do Supabase"></div><button class="primary" id="login-btn">Entrar no painel</button><p class="hint" id="login-error" style="color:#ff929b;display:none">Senha incorreta. Tente novamente.</p></div>
     <div id="admin-content" style="display:none">
-      <div class="tabs" style="flex-wrap:wrap"><button class="tab active" data-tab="settings-view">Edições</button><button class="tab" data-tab="records-view">Reservas da edição</button><button class="tab" data-tab="history-view">Vencedores</button></div>
+      <div class="tabs admin-nav" role="tablist" aria-label="Seções administrativas">
+        <button type="button" class="tab active" data-tab="settings-view">🛠 Gerenciar</button>
+        <button type="button" class="tab" data-tab="create-view">➕ Criar rifa</button>
+        <button type="button" class="tab" data-tab="records-view">📋 Reservas</button>
+        <button type="button" class="tab" data-tab="history-view">🏆 Vencedores</button>
+      </div>
       <div class="admin-view active" id="settings-view">
-         <p class="hint">Crie novas edições e ative somente a que deve aparecer ao público. As anteriores ficam no histórico privado.</p>
-         <div class="field"><label for="admin-edition">Edição selecionada</label><select id="admin-edition" class="edition-select"></select></div>
-         <div class="field"><label for="raffle-name">Título da nova rifa</label><input id="raffle-name" maxlength="120" placeholder="Ex.: Saldão Minis — Edição 2"></div>
-         <div class="formrow"><div class="field"><label for="admin-total">Total de números (1 a 1000)</label><input id="admin-total" type="number" min="1" max="1000" value="100"></div><div class="field"><label for="admin-unit">Preço unitário (R$)</label><input id="admin-unit" type="number" min="0.01" step="0.01" value="1.25"></div></div>
-         <div class="formrow"><div class="field"><label for="admin-package-qty">Números por pacote</label><input id="admin-package-qty" type="number" min="2" max="1000" value="10"></div><div class="field"><label for="admin-package-price">Preço do pacote (R$)</label><input id="admin-package-price" type="number" min="0.01" step="0.01" value="10.00"></div></div>
+        <h3 class="admin-heading">Gerenciar rifas</h3>
+        <p class="hint">Escolha a edição para administrar. Você pode manter mais de uma rifa ativa na vitrine.</p>
+        <div class="field"><label for="admin-edition">Rifa que deseja administrar (número — nome)</label><select id="admin-edition" class="edition-select"></select></div>
+        <label class="hint" style="display:flex;align-items:center;gap:9px;margin:8px 0 17px;cursor:pointer"><input id="show-test-editions" type="checkbox" style="width:17px;height:17px;accent-color:#e6c773"> Mostrar rifas ocultas e finalizadas</label>
+        <div class="admin-action-box">
+          <strong>Visibilidade no painel</strong>
+          <p class="hint">Finalizadas ficam ocultas automaticamente. Você também pode ocultar outras edições sem excluir dados.</p>
+          <button type="button" class="secondary" id="toggle-hidden-edition">Ocultar edição selecionada</button>
+          <p class="hint" id="hidden-edition-feedback" aria-live="polite"></p>
+        </div>
+        <div class="admin-action-box">
+          <strong>Publicação da rifa</strong>
+          <p class="hint">Ativar disponibiliza a edição na vitrine sem desativar as demais. Finalizar é irreversível pelo painel.</p>
+<div class="formrow"><button class="secondary" id="activate-edition">Ativar edição selecionada</button><button class="secondary" id="finish-edition">Finalizar edição selecionada</button></div>
+         <p class="hint" id="edition-status">As edições são armazenadas no Supabase. Finalizar é irreversível pelo painel.</p>        </div>
+        <details class="admin-section" open>
+          <summary>📷 Fotos dos prêmios</summary>
+<div class="admin-photo-controls">
+            <label for="admin-photo-files" style="display:block;font-weight:850;margin-bottom:8px">📷 Fotos dos prêmios da edição selecionada</label>
+            <p class="hint" style="margin:0 0 8px">Até 6 fotos por edição, JPEG, PNG ou WebP, com no máximo 5 MB cada. É possível adicionar e remover fotos mesmo depois de criar a rifa.</p>
+            <input type="file" id="admin-photo-files" accept="image/jpeg,image/png,image/webp" multiple>
+            <button class="secondary" id="upload-photos" style="width:100%;margin-top:10px">Adicionar fotos à edição</button>
+            <div id="admin-photo-feedback" class="hint" aria-live="polite"></div>
+            <div class="admin-photo-list" id="admin-photo-list"></div>
+          </div>
+                  </details>
+        <details class="admin-section">
+          <summary>🎟️ Bônus TOP 1</summary>
+<div class="admin-photo-controls" id="bonus-config-panel">
+            <strong>🎟️ Bônus TOP 1 — edição selecionada</strong>
+            <p class="hint">Configure os bilhetes extras do primeiro colocado. Esta ação não distribui bilhetes, não ativa a rifa e não realiza sorteios.</p>
+            <div class="field"><label for="bonus-qty">Quantidade de bilhetes bônus (0 para desativar)</label><input id="bonus-qty" type="number" min="0" max="1000" step="1" value="0"></div>
+            <button class="secondary" id="save-bonus" type="button">Salvar bônus da edição selecionada</button>
+            <p class="hint" id="bonus-feedback" aria-live="polite"></p>
+            <div id="bonus-manual-panel" style="display:none;margin-top:14px;border-top:1px solid #46745b;padding-top:14px">
+              <strong>🏆 Distribuição manual — TOP 1</strong>
+              <p class="hint">Primeiro confira o ranking e os pagamentos. A distribuição somente acontece após sua confirmação.</p>
+              <button class="secondary" type="button" id="preview-bonus-top" style="width:100%;margin-top:8px">Conferir TOP 1 e bônus</button>
+              <div id="bonus-manual-preview" class="hint" aria-live="polite"></div>
+              <button class="secondary" type="button" id="distribute-manual-bonus" style="width:100%;margin-top:10px" disabled>Distribuir bônus agora</button>
+              <p class="hint" id="bonus-manual-feedback" aria-live="polite"></p>
+            </div>
+            <div id="bonus-test-panel" style="display:none;margin-top:14px;border-top:1px solid #46745b;padding-top:14px">
+              <strong>🧪 Distribuição exclusiva da rifa #008</strong>
+              <p class="hint">Gera os bilhetes bônus apenas para a rifa de teste em rascunho. Não realiza sorteios.</p>
+              <button class="secondary" type="button" id="distribute-test-bonus">Distribuir bônus de teste (#008)</button>
+              <p class="hint" id="bonus-test-feedback" aria-live="polite"></p>
+            </div>
+            </div>
+            <div id="draw-test-panel" style="display:none;margin-top:14px;border-top:1px solid #46745b;padding-top:14px">
+              <strong>🏁 Sorteio exclusivo de teste — rifa #008</strong>
+              <p class="hint">Sorteia entre os bilhetes pagos e os bônus da edição #008. Cada clique confirmado registra uma rodada no Supabase (máximo de três). Não ativa a rifa.</p>
+              <button class="secondary" type="button" id="draw-test-008" style="width:100%;margin-top:10px">Realizar sorteio de teste (#008)</button>
+              <p class="hint" id="draw-test-feedback" aria-live="polite"></p>
+              <div id="draw-test-result" class="record" style="display:none;margin-top:10px" aria-live="polite"></div>
+            </div>
+          </div>
+                 </details>
+      </div>
+      <div class="admin-view" id="create-view">
+        <h3 class="admin-heading">Criar nova rifa</h3>
+        <p class="hint">Preencha os dados da nova rifa. Ela será criada como rascunho e poderá ser ativada depois em <strong>Gerenciar</strong>.</p>
+<div class="field"><label for="raffle-name">Título da nova rifa</label><input id="raffle-name" maxlength="120" placeholder="Ex.: Saldão Minis — Edição 2"></div>
+         <div class="formrow"><div class="field"><label for="admin-total">Total de números (1 a 1000)</label><input id="admin-total" type="number" min="1" max="1000" value="100"></div><div class="field"><label for="admin-unit">Preço unitário (R$)</label><input id="admin-unit" type="number" min="0" step="0.01" value="1.25"></div></div>
+         <div class="formrow"><div class="field"><label for="admin-package-qty">Números por pacote</label><input id="admin-package-qty" type="number" min="2" max="1000" value="10"></div><div class="field"><label for="admin-package-price">Preço do pacote (R$)</label><input id="admin-package-price" type="number" min="0" step="0.01" value="10.00"></div></div>
          <div class="field"><label for="admin-whatsapp">WhatsApp com DDI</label><input id="admin-whatsapp" inputmode="numeric" placeholder="5511999999999"></div>
          <div class="field"><label for="admin-pix">Chave PIX</label><input id="admin-pix" placeholder="Chave PIX para pagamento"></div>
          <button class="primary" id="save-settings">Criar nova edição (rascunho)</button>
-         <div class="formrow"><button class="secondary" id="activate-edition">Ativar edição selecionada</button><button class="secondary" id="finish-edition">Finalizar edição selecionada</button></div>
-         <p class="hint" id="edition-status">As edições são armazenadas no Supabase. Finalizar é irreversível pelo painel.</p>
-       </div>
+                 <p class="hint">Depois de criar, volte à aba <strong>Gerenciar</strong> para incluir fotos e ativar a edição.</p>
+      </div>
        <div class="admin-view" id="records-view"><p class="hint">Somente reservas da edição selecionada.</p><div class="records" id="reservation-records"></div><button class="secondary" id="clear-records" style="margin-top:12px">Atualizar reservas</button></div>
       <div class="admin-view" id="history-view"><p class="hint">Três sorteios por edição. Apenas o número vencedor é excluído.</p><div class="records" id="edition-winners"></div></div>
     </div>
@@ -130,23 +280,66 @@ const db = window.supabase.createClient("https://fornxphycykjadlqsbag.supabase.c
 const $ = id => document.getElementById(id);
 const selecionados = new Set();
 let ocupados = [], tituloRifa = CONFIG.nomeRifa, edicaoAtiva = null, edicoesAdmin = [], edicaoAdminId = null;
+let vitrineEdicoes=[], edicaoPublicaId=null;
+const PHOTO_BUCKET = "rifa-premios";
+const MAX_PHOTOS = 6;
+const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+const PHOTO_TYPES = {"image/jpeg":"jpg","image/png":"png","image/webp":"webp"};
+let publicPhotosSignature = "", publicPhotosEditionId = null, occupiedLoaded = false;
 const money = n => n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const sortedSelected = () => [...selecionados].sort((a,b)=>a-b);
 function calculate(qty){if(qty<=0)return 0;const packs=Math.floor(qty/CONFIG.qtdDesconto),rest=qty%CONFIG.qtdDesconto;return packs*CONFIG.precoPacote+rest*CONFIG.precoUnitario;}
 function setEdition(e){
-  edicaoAtiva=e||null;selecionados.clear();ocupados=[];
+  edicaoAtiva=e||null;selecionados.clear();ocupados=[];occupiedLoaded=false;
+  publicPhotosSignature="";publicPhotosEditionId=null;
+  $("public-prize-panel").style.display="none";
+  $("public-prize-gallery").replaceChildren();
+  $("hero-prize-watermark").replaceChildren();
+  $("hero-prize-watermark").style.display="none";
+  $("public-top3-panel").style.display="none";
   if(e){tituloRifa=e.titulo;CONFIG.totalNumeros=e.total_numeros;CONFIG.precoUnitario=e.preco_unitario_centavos/100;CONFIG.qtdDesconto=e.quantidade_pacote;CONFIG.precoPacote=e.preco_pacote_centavos/100;CONFIG.whatsapp=e.whatsapp||"";CONFIG.chavePix=e.chave_pix||"";}
   updateLabels();renderGrid();updateSummary();
   $("reserve-btn").disabled=!e;
   $("number-grid").style.pointerEvents=e?"":"none";
-  if(!e){$("hero-title").textContent="Nenhuma rifa ativa no momento";$("number-grid").replaceChildren();$("stat-total").textContent="0";}
+  if(!e){$("hero-title").textContent="Nenhuma rifa ativa no momento";$("number-grid").replaceChildren();$("public-prize-panel").style.display="none";publicPhotosSignature="";publicPhotosEditionId=null;}
+  updateAvailability();
+}
+async function carregarVitrine(){
+  const {data,error}=await db.rpc('rifa_edicoes_vitrine');
+  if(error){
+    $('vitrine-feedback').textContent='A vitrine múltipla depende da função SQL rifa_edicoes_vitrine no Supabase. '+error.message;
+    // Compatibilidade com site antigo, até executar SQL.
+    const old=await db.rpc('rifa_edicao_ativa');
+    if(old.error)throw old.error;
+    vitrineEdicoes=(old.data||[]).filter(Boolean);
+  }else{vitrineEdicoes=(data||[]).filter(e=>e.status==='ativa');$('vitrine-feedback').textContent='';}
+  if(!vitrineEdicoes.some(e=>e.id===edicaoPublicaId)){
+    const queryId=new URLSearchParams(location.search).get('rifa');
+    edicaoPublicaId=vitrineEdicoes.find(e=>e.id===queryId)?.id||vitrineEdicoes[0]?.id||null;
+  }
+  await renderVitrine();
+}
+async function renderVitrine(){
+ const grid=$('vitrine-grid');grid.replaceChildren();
+ for(const e of vitrineEdicoes){
+   const card=document.createElement('article');card.className='vitrine-card'+(e.id===edicaoPublicaId?' current':'');
+   const photo=document.createElement('img');photo.className='vitrine-photo';photo.alt='Prêmio da rifa '+e.titulo;
+   const holder=document.createElement('div');holder.className='vitrine-title';holder.textContent=e.titulo;
+   const meta=document.createElement('div');meta.className='vitrine-meta';meta.textContent=`${e.total_numeros} números · ${money(e.preco_unitario_centavos/100)} por número`;
+   const btn=document.createElement('button');btn.className='vitrine-choose';btn.type='button';btn.textContent=e.id===edicaoPublicaId?'✓ Rifa selecionada':'Ver números desta rifa';btn.disabled=e.id===edicaoPublicaId;
+   btn.addEventListener('click',async()=>{edicaoPublicaId=e.id;history.replaceState(null,'',location.pathname+'?rifa='+encodeURIComponent(e.id)+location.hash);await refreshEdition();document.querySelector('.hero').scrollIntoView({behavior:'smooth',block:'start'});});
+   const {data:photos,error:photoError}=await db.rpc('rifa_fotos_publicas',{p_rifa_id:e.id});
+   if(!photoError&&photos?.length){photo.src=db.storage.from(PHOTO_BUCKET).getPublicUrl(photos[0].caminho).data.publicUrl;}
+   else{photo.style.display='none';}
+   card.append(photo,holder,meta,btn);grid.append(card);
+ }
+ if(!vitrineEdicoes.length){$('vitrine-feedback').textContent='Nenhuma rifa está publicada no momento.';}
 }
 async function refreshEdition(){
- const {data,error}=await db.rpc("rifa_edicao_ativa");if(error)throw error;
- const e=(data||[])[0]||null;
- if(e?.id!==edicaoAtiva?.id){setEdition(e);}
- else if(e){setEditionFields(e);}
- if(e)await refreshOccupied();
+ await carregarVitrine();
+ const e=vitrineEdicoes.find(x=>x.id===edicaoPublicaId)||null;
+ if(e?.id!==edicaoAtiva?.id){setEdition(e);}else if(e){setEditionFields(e);}
+ if(e){await Promise.all([refreshOccupied(),refreshPublicPhotos(e.id),refreshPublicTop3(e.id)]);}
 }
 function setEditionFields(e){tituloRifa=e.titulo;CONFIG.totalNumeros=e.total_numeros;CONFIG.precoUnitario=e.preco_unitario_centavos/100;CONFIG.qtdDesconto=e.quantidade_pacote;CONFIG.precoPacote=e.preco_pacote_centavos/100;CONFIG.whatsapp=e.whatsapp||"";CONFIG.chavePix=e.chave_pix||"";updateLabels();updateSummary();}
 function renderGrid(){
@@ -157,7 +350,127 @@ function renderGrid(){
     else {if(selecionados.has(i))b.classList.add("chosen");b.setAttribute("aria-pressed",String(selecionados.has(i)));b.addEventListener("click",()=>{if(selecionados.has(i))selecionados.delete(i);else selecionados.add(i);renderGrid();updateSummary();});}
     grid.appendChild(b);
   }
-  $("stat-total").textContent=CONFIG.totalNumeros;
+  updateAvailability();
+}
+function updateAvailability(){
+  const total=edicaoAtiva?CONFIG.totalNumeros:0;
+  if(!occupiedLoaded&&total){
+    $("available-count").textContent="—";
+    $("occupied-count").textContent=` / ${total} no total`;
+    $("availability-caption").textContent="Consultando reservas...";
+    $("availability-bar").style.width="0%";
+    return;
+  }
+  const validTaken=new Set(ocupados.filter(n=>Number.isInteger(n)&&n>=1&&n<=total));
+  const available=Math.max(0,total-validTaken.size);
+  $("available-count").textContent=String(available);
+  $("occupied-count").textContent=` / ${total} no total`;
+  $("availability-caption").textContent=`${validTaken.size} ocupado${validTaken.size===1?"":"s"}`;
+  $("availability-bar").style.width=total?`${100*available/total}%`:"0%";
+}
+async function refreshPublicPhotos(rifaId){
+  const {data,error}=await db.rpc("rifa_fotos_publicas",{p_rifa_id:rifaId});
+  if(rifaId!==edicaoAtiva?.id)return;
+  if(error){console.warn("Não foi possível carregar fotos",error.message);return;}
+  const photos=data||[];
+  const signature=photos.map(p=>p.id+":"+p.caminho).join("|");
+  if(publicPhotosEditionId===rifaId && publicPhotosSignature===signature)return;
+  publicPhotosEditionId=rifaId;publicPhotosSignature=signature;
+  const mark=$("hero-prize-watermark");mark.replaceChildren();
+  if(photos.length){
+    const firstUrl=db.storage.from(PHOTO_BUCKET).getPublicUrl(photos[0].caminho).data.publicUrl;
+    const mainLink=document.createElement("a");mainLink.href=firstUrl;mainLink.target="_blank";mainLink.rel="noopener noreferrer";mainLink.className="hero-prize-main";mainLink.title="Ampliar foto do prêmio";
+    const img=document.createElement("img");img.src=firstUrl;img.alt="Prêmio desta rifa";mainLink.append(img);mark.append(mainLink);
+    if(photos.length>1){
+      const thumbs=document.createElement("div");thumbs.className="hero-prize-thumbnails";
+      for(const [i,p] of photos.entries()){
+        const url=db.storage.from(PHOTO_BUCKET).getPublicUrl(p.caminho).data.publicUrl;
+        const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener noreferrer";a.title=`Ampliar foto ${i+1}`;
+        const ti=document.createElement("img");ti.src=url;ti.alt=`Foto ${i+1} do prêmio`;ti.loading="lazy";a.append(ti);thumbs.append(a);
+      }
+      mark.append(thumbs);
+    }
+    mark.style.display="flex";
+  } else {mark.style.display="none";}
+  $("public-prize-gallery").replaceChildren();
+  $("public-prize-panel").style.display="none";
+}
+async function refreshPublicTop3(rifaId){
+  const panel=$("public-top3-panel"),grid=$("public-top3-grid"),feedback=$("public-top3-feedback");
+  panel.style.display="";grid.replaceChildren();feedback.textContent="Atualizando classificação...";
+  // Esta RPC precisa permitir leitura pública do ranking sem expor telefone ou dados privados.
+  const {data,error}=await db.rpc("rifa_top_compradores",{p_rifa_id:rifaId});
+  if(rifaId!==edicaoAtiva?.id)return;
+  if(error){feedback.textContent="Ranking indisponível no momento.";console.warn("TOP 3:",error.message);return;}
+  const rows=(Array.isArray(data)?data:[]).slice().sort((a,b)=>Number(a.posicao||999)-Number(b.posicao||999)).slice(0,3);
+  if(!rows.length){feedback.textContent="Ainda não há participantes com pagamentos confirmados.";return;}
+  for(const [i,r] of rows.entries()){
+    const card=document.createElement("div");card.className="top3-card";
+    const place=document.createElement("div");place.className="place";place.textContent=["🥇 1º lugar","🥈 2º lugar","🥉 3º lugar"][i];
+    const buyer=document.createElement("strong");buyer.className="buyer";buyer.textContent=String(r.nome||"Participante");
+    const qty=document.createElement("div");qty.className="quantity";const n=Number(r.quantidade_numeros||0);qty.textContent=`${n} número${n===1?"":"s"} pago${n===1?"":"s"}`;
+    card.append(place,buyer,qty);grid.append(card);
+  }
+  feedback.textContent="Ranking atualizado conforme os pagamentos registrados.";
+}
+async function renderAdminPhotos(){
+  const area=$("admin-photo-list");area.textContent="Carregando fotos...";
+  const rifaId=edicaoAdminId;
+  if(!rifaId){area.textContent="Selecione uma edição primeiro.";return;}
+  const {data,error}=await db.rpc("rifa_fotos_admin",{p_rifa_id:rifaId});
+  if(rifaId!==edicaoAdminId)return;
+  area.replaceChildren();
+  if(error){area.textContent="Erro ao consultar fotos: "+error.message;return;}
+  const photos=data||[];
+  $("admin-photo-feedback").textContent=`${photos.length} de ${MAX_PHOTOS} fotos cadastradas nesta edição.`;
+  if(!photos.length){area.textContent="Nenhuma foto nesta edição.";return;}
+  for(const p of photos){
+    const url=db.storage.from(PHOTO_BUCKET).getPublicUrl(p.caminho).data.publicUrl;
+    const card=document.createElement("div");card.className="admin-photo-card";
+    const img=document.createElement("img");img.src=url;img.loading="lazy";img.alt="Foto cadastrada";card.append(img);
+    const btn=document.createElement("button");btn.textContent="Remover foto";
+    btn.addEventListener("click",()=>removeAdminPhoto(p,rifaId,btn));card.append(btn);area.append(card);
+  }
+}
+async function uploadAdminPhotos(){
+  const rifaId=edicaoAdminId,files=[...$("admin-photo-files").files];
+  if(!rifaId)return toast("Selecione uma edição para as fotos.");
+  if(!files.length)return toast("Escolha ao menos uma foto.");
+  if(files.some(f=>!PHOTO_TYPES[f.type]||f.size>MAX_PHOTO_BYTES||f.size===0))return toast("Use apenas JPEG, PNG ou WebP de até 5 MB.");
+  const btn=$("upload-photos"),select=$("admin-edition");btn.disabled=true;select.disabled=true;
+  let saved=0;
+  try{
+    const {data:existing,error:queryError}=await db.rpc("rifa_fotos_admin",{p_rifa_id:rifaId});
+    if(queryError)throw queryError;
+    if(files.length+(existing||[]).length>MAX_PHOTOS)throw new Error(`Limite de ${MAX_PHOTOS} fotos por edição.`);
+    for(const f of files){
+      $("admin-photo-feedback").textContent=`Enviando foto ${saved+1} de ${files.length}...`;
+      const path=`${rifaId}/${crypto.randomUUID()}.${PHOTO_TYPES[f.type]}`;
+      const {error:uploadError}=await db.storage.from(PHOTO_BUCKET).upload(path,f,{contentType:f.type,upsert:false,cacheControl:"3600"});
+      if(uploadError)throw uploadError;
+      const {error:saveError}=await db.rpc("rifa_adicionar_foto",{p_rifa_id:rifaId,p_caminho:path});
+      if(saveError){await db.storage.from(PHOTO_BUCKET).remove([path]);throw saveError;}
+      saved++;
+    }
+    $("admin-photo-files").value="";
+    toast(`${saved} foto${saved===1?" adicionada":"s adicionadas"}!`);
+  }catch(e){toast(`Fotos: ${e.message}`);}
+  finally{
+    btn.disabled=false;select.disabled=false;
+    await renderAdminPhotos();
+    if(edicaoAtiva?.id===rifaId)await refreshPublicPhotos(rifaId);
+  }
+}
+async function removeAdminPhoto(photo,rifaId,btn){
+  if(!confirm("Remover esta foto da rifa?"))return;
+  btn.disabled=true;
+  const {data:path,error}=await db.rpc("rifa_excluir_foto",{p_foto_id:photo.id,p_rifa_id:rifaId});
+  if(error){toast("Não foi possível excluir a foto: "+error.message);btn.disabled=false;return;}
+  const removed=await db.storage.from(PHOTO_BUCKET).remove([path]);
+  if(removed.error)toast("Foto desvinculada. Verifique o arquivo antigo no Storage: "+removed.error.message);
+  else toast("Foto removida.");
+  await renderAdminPhotos();
+  if(edicaoAtiva?.id===rifaId)await refreshPublicPhotos(rifaId);
 }
 function updateSummary(){
   const nums=sortedSelected();$("selected-count").textContent=`${nums.length} selecionado${nums.length===1?"":"s"}`;
@@ -187,20 +500,156 @@ async function login(){
  await loadEditions();
 }
 function chosenEdition(){return edicoesAdmin.find(e=>e.id===edicaoAdminId)||null;}
+let idsOcultosAdmin=new Set();
 async function loadEditions(preferId){
- const {data,error}=await db.rpc("rifa_listar_edicoes_admin");if(error){toast("Falha ao listar edições: "+error.message);return;}
- edicoesAdmin=data||[];
+ const [edResult,hiddenResult]=await Promise.all([
+   db.rpc("rifa_listar_edicoes_admin"),
+   db.rpc("rifa_ids_ocultas_admin")
+ ]);
+ if(edResult.error){toast("Falha ao listar edições: "+edResult.error.message);return;}
+ if(hiddenResult.error){
+   toast("Falha ao consultar rifas ocultas: "+hiddenResult.error.message);
+   return;
+ }
+ idsOcultosAdmin=new Set(hiddenResult.data||[]);
+ const mostrarOcultas=$("show-test-editions")?.checked===true;
+ edicoesAdmin=(edResult.data||[]).filter(e=>mostrarOcultas||!idsOcultosAdmin.has(e.id));
  edicaoAdminId=preferId||edicaoAdminId||edicoesAdmin.find(e=>e.status==="ativa")?.id||edicoesAdmin[0]?.id||null;
- if(!edicoesAdmin.some(e=>e.id===edicaoAdminId))edicaoAdminId=edicoesAdmin[0]?.id||null;
+ if(!edicoesAdmin.some(e=>e.id===edicaoAdminId))edicaoAdminId=edicoesAdmin.find(e=>e.status==="ativa")?.id||edicoesAdmin[0]?.id||null;
  const sel=$("admin-edition");sel.replaceChildren();
- for(const e of edicoesAdmin){const o=document.createElement("option");o.value=e.id;o.textContent=`${e.titulo} — ${e.status}`;sel.append(o);}
+ for(const e of edicoesAdmin){const o=document.createElement("option");o.value=e.id;o.textContent=`${e.numero_edicao == null ? "SEM Nº" : String(e.numero_edicao).padStart(3,"0")} — ${e.titulo} (${e.status})`;sel.append(o);}
  sel.value=edicaoAdminId||"";
- $("edition-status").textContent=chosenEdition()?`Edição selecionada: ${chosenEdition().titulo} (${chosenEdition().status}). A criação abaixo gera uma NOVA edição.`:"Nenhuma edição cadastrada.";
- await Promise.all([renderRecords(),renderWinners()]);
+  const chosen=chosenEdition();
+  const hidden=chosen&&idsOcultosAdmin.has(chosen.id);
+  $("toggle-hidden-edition").disabled=!chosen||chosen.status==="finalizada";
+  $("toggle-hidden-edition").textContent=hidden?"Mostrar edição no painel":"Ocultar edição selecionada";
+  $("hidden-edition-feedback").textContent=!chosen?"Selecione uma edição.":chosen.status==="finalizada"?"Edição finalizada: oculta automaticamente, disponível pelo filtro.":hidden?"Esta edição está oculta da lista padrão.":"Esta edição aparece na lista padrão.";
+  $("bonus-qty").value=Number(chosen?.bonus_top1_quantidade||0);
+  $("bonus-feedback").textContent=chosen ? `Edição selecionada: ${chosen.titulo}. Confirme antes de salvar.` : "Selecione uma edição.";
+  $("save-bonus").disabled=!chosen||chosen.status==="finalizada";
+   const manualPanel=$('bonus-manual-panel');
+   const eligibleManual=chosen && ['ativa','pausada'].includes(chosen.status) && Number(chosen.bonus_top1_quantidade)>0;
+   manualPanel.style.display=eligibleManual?'block':'none';
+   $('distribute-manual-bonus').disabled=true;
+   $('bonus-manual-preview').textContent='';
+   $('bonus-manual-feedback').textContent='';
+  const isTest=chosen && chosen.titulo==="novo teste" && chosen.status==="rascunho" && (chosen.numero_edicao == null || Number(chosen.numero_edicao)===8);
+  $("bonus-test-panel").style.display=isTest?"block":"none";
+  $("distribute-test-bonus").disabled=!isTest;
+   $("bonus-test-feedback").textContent="";
+   $("draw-test-panel").style.display=isTest?"block":"none";
+   $("draw-test-008").disabled=!isTest;
+   $("draw-test-feedback").textContent="";
+   $("draw-test-result").style.display="none";
+  $("edition-status").textContent=chosenEdition()?`Edição selecionada: ${chosenEdition().titulo} (${chosenEdition().status}). A criação abaixo gera uma NOVA edição.`:"Nenhuma edição cadastrada.";
+  await Promise.all([renderRecords(),renderWinners(),renderAdminPhotos()]);
 }
-async function createEdition(){
+async function toggleHiddenEdition(){
+ const e=chosenEdition();if(!e)return;
+ if(e.status==="finalizada")return toast("Rifas finalizadas permanecem ocultas.");
+ const currentlyHidden=idsOcultosAdmin.has(e.id);
+ const nextHidden=!currentlyHidden;
+ const note=nextHidden&&e.status==="ativa"?" ATENÇÃO: a rifa ativa continuará aparecendo na vitrine pública. Para tirá-la da vitrine, ela também precisa ser pausada ou finalizada.":"";
+ if(!confirm(`${nextHidden?"Ocultar":"Mostrar"} a edição ${e.numero_edicao} — ${e.titulo} no painel?${note}`))return;
+ const {error}=await db.rpc("rifa_definir_oculta_admin",{p_rifa_id:e.id,p_oculta:nextHidden});
+ if(error)return toast("Não foi possível alterar a visibilidade: "+error.message);
+ toast(nextHidden?"Rifa oculta no painel.":"Rifa visível no painel.");
+ await loadEditions(nextHidden?null:e.id);
+}
+async function saveBonusConfig(){
+  const e=chosenEdition();
+  if(!e)return toast("Selecione uma edição.");
+  const qty=Number($("bonus-qty").value);
+  if(!Number.isInteger(qty)||qty<0||qty>1000)return toast("Informe uma quantidade inteira entre 0 e 1000.");
+  if(!["rascunho","pausada","ativa"].includes(e.status))return toast("Edição finalizada não pode ser alterada.");
+  if(!confirm(`Configurar ${qty} bilhete(s) bônus TOP 1 exclusivamente para a edição ${e.numero_edicao ? '#'+e.numero_edicao+' — ' : ''}${e.titulo}?`))return;
+  const btn=$("save-bonus");btn.disabled=true;
+  try{
+    const {error}=await db.rpc("rifa_configurar_bonus",{p_rifa_id:e.id,p_ativo:qty>0,p_quantidade:qty});
+    if(error)throw error;
+    $("bonus-feedback").textContent=`Configuração salva: ${qty} bilhete(s) bônus. Nenhum bilhete foi distribuído.`;
+    toast("Configuração de bônus salva.");
+    await loadEditions(e.id);
+  }catch(err){$("bonus-feedback").textContent="Erro: "+err.message;toast("Erro ao configurar bônus.");}
+  finally{btn.disabled=false;}
+}
+let bonusPreview=null;
+async function previewManualBonus(){
+ const e=chosenEdition();bonusPreview=null;$('distribute-manual-bonus').disabled=true;
+ const output=$('bonus-manual-preview');output.textContent='Consultando ranking...';
+ if(!e || !['ativa','pausada'].includes(e.status) || Number(e.bonus_top1_quantidade)<1){output.textContent='Selecione uma edição ativa ou pausada com bônus configurados.';return;}
+ try{
+  const {data,error}=await db.rpc('rifa_top_compradores',{p_rifa_id:e.id});
+  if(error)throw error;
+  const rows=Array.isArray(data)?data:[];
+  const top=rows.find(r=>Number(r.posicao)===1)||rows[0];
+  if(!top)throw new Error('Nenhum comprador pago encontrado.');
+  const nome=String(top.nome||'').trim();
+  if(!nome)throw new Error('Ranking sem nome do beneficiário.');
+  bonusPreview={editionId:e.id,qty:Number(e.bonus_top1_quantidade),nome,quantidade:Number(top.quantidade_numeros)};
+  output.textContent=`TOP 1: ${nome} (${top.quantidade_numeros} números pagos). Bônus configurados: ${bonusPreview.qty}. Confirme pagamentos e encerramento das vendas antes de distribuir.`;
+  $('distribute-manual-bonus').disabled=false;
+ }catch(err){output.textContent='Não foi possível conferir o ranking: '+err.message;}
+}
+async function distributeManualBonus(){
+ const e=chosenEdition(),p=bonusPreview;
+ if(!e||!p||p.editionId!==e.id||p.qty!==Number(e.bonus_top1_quantidade))return toast('Atualize a conferência do TOP 1.');
+ if(!['ativa','pausada'].includes(e.status))return toast('A edição deve estar ativa ou pausada.');
+ if(!confirm(`CONFIRMAÇÃO DEFINITIVA\n\nEdição: #${e.numero_edicao||'?'} — ${e.titulo}\nTOP 1: ${p.nome}\nNúmeros pagos: ${p.quantidade}\nBônus: ${p.qty}\n\nVocê conferiu todos os pagamentos e encerrou as vendas? Distribuir os bônus agora?`))return;
+ const btn=$('distribute-manual-bonus');btn.disabled=true;
+ const feedback=$('bonus-manual-feedback');feedback.textContent='Solicitando distribuição ao Supabase...';
+ try{
+  const {data,error}=await db.rpc('rifa_distribuir_bonus',{p_rifa_id:e.id});
+  if(error)throw error;
+  const list=Array.isArray(data)?data:[];
+  feedback.textContent=`Distribuição solicitada e confirmada pelo banco para #${e.numero_edicao}. ${list.length?list.length+' registros retornados.':'Consulte os bilhetes bônus no Supabase para conferir os registros.'}`;
+  bonusPreview=null;$('bonus-manual-preview').textContent='Distribuição concluída. Não tente distribuir novamente.';
+  toast('Distribuição executada. Confira os bilhetes no Supabase.');
+ }catch(err){feedback.textContent='Erro ou situação não confirmada: '+err.message+'. Confira o Supabase ANTES de tentar novamente.';}
+}
+async function distributeTestBonus(){
+  const e=chosenEdition();
+  if(!e || e.titulo!=="novo teste" || e.status!=="rascunho" || (e.numero_edicao != null && Number(e.numero_edicao)!==8)){
+    toast("Distribuição permitida somente na rifa #008 em rascunho.");return;
+  }
+  if(!confirm("Confirmar distribuição de bônus EXCLUSIVAMENTE na rifa #008 — novo teste? Esta ação grava bilhetes no banco e não poderá ser repetida."))return;
+  const btn=$("distribute-test-bonus");btn.disabled=true;
+  $("bonus-test-feedback").textContent="Distribuindo bilhetes de teste...";
+  try{
+    const {data,error}=await db.rpc("rifa_distribuir_bonus_teste_008");
+    if(error)throw error;
+    const codes=(data||[]).map(b=>b.codigo_bonus).join(", ");
+    const beneficiary=data?.[0]?.nome_beneficiario||"não informado";
+    $("bonus-test-feedback").textContent=`Distribuídos ${(data||[]).length} bilhetes para ${beneficiary}: ${codes}.`;
+    toast("Bônus de teste distribuídos.");
+  }catch(err){
+    $("bonus-test-feedback").textContent="Erro na distribuição: "+err.message;
+    toast("Falha na distribuição dos bônus.");
+  }finally{btn.disabled=false;}
+}
+ async function drawTest008(){
+   const e=chosenEdition();
+   const isTest=e && e.titulo==="novo teste" && e.status==="rascunho" && (e.numero_edicao == null || Number(e.numero_edicao)===8);
+   if(!isTest){toast("Sorteio permitido somente na rifa de teste #008.");return;}
+   if(!confirm("ATENÇÃO: realizar um sorteio REAL DE TESTE na rifa #008 — novo teste? O resultado será gravado no Supabase e não poderá ser desfeito pelo painel. A rifa #006 não será alterada."))return;
+   const btn=$("draw-test-008"),feedback=$("draw-test-feedback"),result=$("draw-test-result");
+   btn.disabled=true;feedback.textContent="Registrando sorteio exclusivamente na rifa #008...";result.style.display="none";
+   try{
+     const {data,error}=await db.rpc("rifa_sortear_teste_008");
+     if(error)throw error;
+     if(!data || Number(data.rifa)!==8 || ![1,2,3].includes(Number(data.rodada)))throw new Error("Resultado inesperado. Consulte o histórico no Supabase antes de tentar novamente.");
+     const tipo=data.tipo_bilhete==="bonus"?"BILHETE BÔNUS":"NÚMERO PAGO";
+     result.textContent=`🏆 ${data.rodada}ª rodada — ${tipo}: ${data.bilhete_vencedor} — Vencedor: ${data.nome_vencedor||"não informado"}`;
+     result.style.display="block";
+     feedback.textContent="Resultado registrado na rifa #008. Confira também o histórico no Supabase antes de realizar outra rodada.";
+     toast("Sorteio de teste registrado!");
+     await renderWinners();
+   }catch(err){feedback.textContent="Não foi possível concluir: "+err.message;toast("Falha no sorteio de teste.");}
+   finally{btn.disabled=false;}
+ }
+ async function createEdition(){
  const title=$("raffle-name").value.trim(),total=Number($("admin-total").value),unit=Math.round(Number($("admin-unit").value)*100),qty=Number($("admin-package-qty").value),pack=Math.round(Number($("admin-package-price").value)*100);
- if(title.length<2||title.length>120||!Number.isInteger(total)||total<1||total>1000||!Number.isInteger(qty)||qty<2||qty>1000||!Number.isSafeInteger(unit)||unit<1||!Number.isSafeInteger(pack)||pack<1){toast("Confira os dados da nova edição.");return;}
+ if(title.length<2||title.length>120||!Number.isInteger(total)||total<1||total>1000||!Number.isInteger(qty)||qty<2||qty>1000||!Number.isSafeInteger(unit)||unit<0||!Number.isSafeInteger(pack)||pack<0){toast("Confira os dados da nova edição.");return;}
  if(!confirm(`Criar uma nova edição chamada "${title}"? Ela ficará em rascunho até ser ativada.`))return;
  const {data,error}=await db.rpc("rifa_criar_edicao",{p_titulo:title,p_total_numeros:total,p_preco_unitario_centavos:unit,p_quantidade_pacote:qty,p_preco_pacote_centavos:pack,p_whatsapp:$("admin-whatsapp").value.trim(),p_chave_pix:$("admin-pix").value.trim()});
  if(error){toast("Erro ao criar: "+error.message);return;}
@@ -209,7 +658,7 @@ async function createEdition(){
 async function changeEditionStatus(kind){
  const e=chosenEdition();if(!e)return toast("Selecione uma edição.");
  if(kind==="finalizar"&&!confirm(`FINALIZAR definitivamente a edição "${e.titulo}"? Ela não poderá ser reativada pelo painel.`))return;
- if(kind==="ativar"&&!confirm(`Ativar "${e.titulo}"? A rifa atualmente ativa será pausada.`))return;
+ if(kind==="ativar"&&!confirm(`Ativar "${e.titulo}" na vitrine? As outras rifas ativas continuarão disponíveis.`))return;
  const fn=kind==="ativar"?"rifa_ativar_edicao":"rifa_finalizar_edicao";
  const {error}=await db.rpc(fn,{p_rifa_id:e.id});if(error){toast("Erro: "+error.message);return;}
  toast(kind==="ativar"?"Edição ativada.":"Edição finalizada.");await loadEditions(e.id);await refreshEdition();
@@ -260,10 +709,10 @@ async function sendWhatsApp(){
      const {data:id,error}=await db.rpc("rifa_reservar_edicao",{p_rifa_id:edicaoAtiva.id,p_nome:name,p_telefone:phone,p_numeros:nums});
     if(error)throw error;
     const total=calculate(nums.length);
-    const message=`Olá! Fiz uma reserva na *${tituloRifa}* — *Saldão Minis*.\n\n*Reserva:* ${id}\n*Nome:* ${name}\n*Telefone:* ${phone||"Não informado"}\n*Números:* ${nums.join(", ")}\n*Total:* ${money(total)}\n*Chave PIX:* ${CONFIG.chavePix}\n\nVou enviar o comprovante por aqui para conferência.`;
+    const message=total===0 ? `Olá! Quero participar da rifa gratuita *${tituloRifa}* — *Saldão Minis*.\n\n*Reserva:* ${id}\n*Nome:* ${name}\n*Telefone:* ${phone||"Não informado"}\n*Números:* ${nums.join(", ")}\n*Participação gratuita.*` : `Olá! Fiz uma reserva na *${tituloRifa}* — *Saldão Minis*.\n\n*Reserva:* ${id}\n*Nome:* ${name}\n*Telefone:* ${phone||"Não informado"}\n*Números:* ${nums.join(", ")}\n*Total:* ${money(total)}\n*Chave PIX:* ${CONFIG.chavePix}\n\nVou enviar o comprovante por aqui para conferência.`;
     closeModal("customer-modal");
     selecionados.clear();await refreshOccupied();updateSummary();
-    toast("Reserva salva! Envie o comprovante pelo WhatsApp.");
+    toast(total===0 ? "Participação registrada! Confirme pelo WhatsApp." : "Reserva salva! Envie o comprovante pelo WhatsApp.");
     window.location.href=`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(message)}`;
   }catch(e){toast("Não foi possível reservar: "+e.message);await refreshOccupied();}
   finally{btn.disabled=false;btn.textContent="Continuar no WhatsApp";}
@@ -275,6 +724,7 @@ async function refreshOccupied(){
   if(currentId!==edicaoAtiva?.id)return;
   if(error){toast("Falha ao atualizar números: "+error.message);return;}
   ocupados=(data||[]).map(x=>x.numero);
+  occupiedLoaded=true;
   ocupados.forEach(n=>selecionados.delete(n));
   renderGrid();updateSummary();
 }
@@ -285,8 +735,16 @@ $("close-customer").addEventListener("click",()=>closeModal("customer-modal"));
 $("login-btn").addEventListener("click",login);
 $("admin-password").addEventListener("keydown",e=>{if(e.key==="Enter")login();});
 $("save-settings").addEventListener("click",createEdition);
+$("save-bonus").addEventListener("click",saveBonusConfig);
+$("preview-bonus-top").addEventListener("click",previewManualBonus);
+$("distribute-manual-bonus").addEventListener("click",distributeManualBonus);
+ $("distribute-test-bonus").addEventListener("click",distributeTestBonus);
+ $("draw-test-008").addEventListener("click",drawTest008);
+$("upload-photos").addEventListener("click",uploadAdminPhotos);
 $("activate-edition").addEventListener("click",()=>changeEditionStatus("ativar"));
 $("finish-edition").addEventListener("click",()=>changeEditionStatus("finalizar"));
+$("show-test-editions").addEventListener("change",()=>loadEditions());
+$("toggle-hidden-edition").addEventListener("click",toggleHiddenEdition);
 $("admin-edition").addEventListener("change",()=>{edicaoAdminId=$("admin-edition").value;loadEditions(edicaoAdminId);});
 $("reserve-btn").addEventListener("click",beginReservation);
 $("send-whatsapp").addEventListener("click",sendWhatsApp);
